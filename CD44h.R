@@ -6,7 +6,7 @@ library(gridExtra)
 #Load data
 WT.data<-Read10X(data.dir="DATA/sample1")
 CD44h.data<-Read10X(data.dir="DATA/sample2")
-#Seurat object initalization
+#Seurat object initialization
 WT <- CreateSeuratObject(counts = WT.data, project = "AT2 WT", min.cells = 3, min.features = 200)
 CD44h <- CreateSeuratObject(counts = CD44h.data, project = "CD44 High", min.cells = 3, min.features = 200)
 
@@ -17,7 +17,7 @@ CD44h@meta.data[,"protocol"] <- "CD44 high"
 WT <- NormalizeData(WT)
 CD44h <- NormalizeData(CD44h)
 
-#subsetting by relative CD44 expression.
+#sub-setting by relative CD44 expression.
 WTCD44low <- subset(x=WT,subset = Cd44 <=0.5)
 CD44highsubset <- subset(x=CD44h,subset = Cd44 >= 1)
 WTCD44low@meta.data[,"protocol"] <- "CD44 low"
@@ -27,7 +27,7 @@ CD44highsubset@meta.data[,"protocol"] <- "CD44 high"
 #merging Dataset into one matrix
 data.combine <- merge(WTCD44low,y = CD44highsubset, add.cell.ids = c("CD44 low","CD44 high"), project = "CD44 low vs CD44 high")
 
-#Harmony
+#Integration
 #Split objects base on protocol
 data.list <- SplitObject(data.combine, split.by = "protocol")
 all.genes <-rownames(data.combine)
