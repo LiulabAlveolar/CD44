@@ -3,15 +3,15 @@ library(patchwork)
 library(ggplot2)
 
 col_p = c("#F3E5C2","#EFB89A","#EF8F50", "#F5731D","#FA4602","#FE5100")
-#WT.data<-Read10X(data.dir="WT")
-#CD44h.data<-Read10X(data.dir="CD44hi")
+WT.data<-Read10X(data.dir="WT")
+CD44h.data<-Read10X(data.dir="CD44hi")
 #create Seurat objects
 WT <- CreateSeuratObject(counts = WT.data, project = "AT2 WT", min.cells = 3, min.features = 200)
 CD44h <- CreateSeuratObject(counts = CD44h.data, project = "CD44 High", min.cells = 3, min.features = 200)
 WT[["percent.mt"]] <- PercentageFeatureSet(WT, pattern = "^mt-")
 CD44h[["percent.mt"]] <- PercentageFeatureSet(CD44h, pattern = "^mt-")
 
-#Qc
+#QC, Refer to QC.R  
 #VlnPlot(WT, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 #VlnPlot(CD44h, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 #plot1 <- FeatureScatter(WT, feature1 = "nCount_RNA", feature2 = "percent.mt")
