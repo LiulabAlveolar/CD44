@@ -73,25 +73,9 @@ AT2<-FindClusters(AT2, resolution = 0.3)
 AT2<-RunUMAP(AT2, dims = 1:15, min.dist = 1, n.neighbors = 40, spread = 3, local.connectivity = 20)
 DimPlot(AT2, reduction = "umap", label = T)
 DimPlot(AT2, reduction = "umap", split.by = "protocol")
-FeaturePlot(AT2, features = c("Foxj1","Ptprc","Mki67", "Sox2", "Muc5b", "Scgb1a1", "Hopx","Pdpn", "Tdtomato", "Cd44"), min.cutoff = "q10", order = T)
 FeaturePlot(AT2, features = c("Sftpc", "Etv5"), min.cutoff = "q10", order = T)
-FeaturePlot(AT2, features = c("Tlr4"),cols=col_p, min.cutoff = "q10", order = T,split.by = "protocol")
-VlnPlot(AT2, features = "Cd44", pt.size = 0)
-
-DotPlot(AT2, features = c("Cd44","Thbs1", "Nfkb2","Tnfrsf9","Ccl20","Mki67","Top2a","Krt19","Tlr2","Tlr3","Tlr4"))
-DotPlot(AT2, features = c("Thbs1", "Nfkb2","Tnfrsf9","Ccl20","Mki67","Top2a"))
-DotPlot(AT2, features = c("Krt19", "Cd44","Tlr2","Tlr3","Tlr4","Top2a"))
-FeaturePlot(AT2, features = "Cd44",cols = col_p)
-DotPlot(AT2, features = "Cd44")
-cluster4_6.markers <- FindMarkers(AT2, ident.1 = 4, ident.2 = 6, min.pct = 0.25)
-cluster4.markers<-FindMarkers(AT2, ident.1 = 4, min.pct = 0.25)
-
-AT2_2 <- RenameIdents(CD44, '0'="WT AT2",'1'="WT AT2", '2'="CD44h AT2",'3'="CD44h AT2",'4'="Proliferating 1",'5'="CD44h AT2",'6'="Proliferating 2") 
-VlnPlot(AT2_2, features = c("Thbs1", "Nfkb2","Tnfrsf9","Ccl20","Mki67","Top2a"))
-VlnPlot(AT2_2, features = c("Thbs1", "Nfkb2","Tnfrsf9"), pt.size = 0)
-VlnPlot(AT2_2,features = c("Krt8", "Lgals3","Krt19", "Sfn") )
+DotPlot(AT2, features = c("Cd44", "Mki67", "Top2a", "Thbs1", "Nfkb2", "Tnfrsf9", "Ccl20"))
 saveRDS(AT2, "AT2.rds")
-
 
 
 
